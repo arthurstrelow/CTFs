@@ -51,10 +51,10 @@ No entanto, o backend do `SWIFT` expõe um aplicativo web interno em [http ://
 ---
 # Visão da Rede
 
-**Inicio do `Pentest`**
+**Inicio do `Pentest`**\
 ![](img/Pasted_image_20250603104157.png)
 
-**A Partir do 6º Tópico**
+**A Partir do 6º Tópico**\
 ![LOL](img/Pasted_image_20250610165722.png)
 
 **A Partir do 7º tópico**

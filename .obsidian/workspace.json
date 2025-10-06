@@ -1,0 +1,183 @@
+{
+  "main": {
+    "id": "14c4afd978a96075",
+    "type": "split",
+    "children": [
+      {
+        "id": "ebe01550f91befd5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b00d00f31068af0f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Capstone_L_W_Hard/README.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "README"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "168de99f2c1b1022",
+    "type": "split",
+    "children": [
+      {
+        "id": "e0dde66adae1f302",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2379811905fedaec",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "0470fb6becbd0a77",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "9d44696a019be883",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "horizontal",
+    "width": 436.5
+  },
+  "right": {
+    "id": "f17f19e977a5b899",
+    "type": "split",
+    "children": [
+      {
+        "id": "753519d48fd304bb",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "03ff89d49707cb0b",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Capstone_L_W_Hard/README.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for README"
+            }
+          },
+          {
+            "id": "f9733a175864d54b",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Capstone_L_W_Hard/README.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from README"
+            }
+          },
+          {
+            "id": "8a0b37ec7b53fb4e",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "57d2b2adcf6990a7",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Capstone_L_W_Hard/README.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of README"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "b00d00f31068af0f",
+  "lastOpenFiles": [
+    "Capstone_L_W_Hard/Capstone (L&W).pdf",
+    "Capstone_L_W_Hard/README.md",
+    "Capstone_L_W_Hard/img/teste.png",
+    "Capstone_L_W_Hard/img/Pasted image 20250603113257.png",
+    "Capstone_L_W_Hard/img/Pasted_image_20250603104157.png",
+    "img/Pasted.md",
+    "img"
+  ]
+}
